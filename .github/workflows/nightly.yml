@@ -1,0 +1,49 @@
+name: Nightly Build
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      #
+      # Checkout
+      #
+      - name: checkout code
+        uses: actions/checkout@v2
+        with:
+          repository: hay-kot/mealie
+          ref: a2f8f271937780a198cf6340293ec7a49513e124
+      #
+      # Setup QEMU
+      #
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
+      #
+      # Setup Buildx
+      #
+      - name: install buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          install: true
+      #
+      # Login to Docker Hub
+      #
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #
+      # Build
+      #
+      - name: build the image
+        run: |
+          docker build --push --no-cache \
+            --tag hendrix04/mealie-combined:nightly \
+            --platform linux/amd64,linux/arm64 .
