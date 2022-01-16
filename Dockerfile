@@ -148,5 +148,5 @@ EXPOSE ${FRONTEND_PORT}
 
 HEALTHCHECK CMD curl -f http://localhost:${BACKEND_PORT} || exit 1
 
-RUN chmod +x $MEALIE_HOME/mealie/run.sh
-ENTRYPOINT $MEALIE_HOME/mealie/run.sh
+RUN chmod +x $MEALIE_HOME/run.sh
+ENTRYPOINT $MEALIE_HOME/run.sh
