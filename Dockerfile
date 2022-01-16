@@ -142,8 +142,8 @@ RUN curl -L0 $CRF_MODEL_URL --output $MEALIE_HOME/mealie/services/parser_service
 VOLUME [ "$MEALIE_HOME/data/" ]
 ENV BACKEND_PORT=80
 ENV FRONTEND_PORT=3000
+ENV API_URL="http://localhost:$BACKEND_PORT"
 
-EXPOSE ${BACKEND_PORT}
 EXPOSE ${FRONTEND_PORT}
 
 HEALTHCHECK CMD curl -f http://localhost:${BACKEND_PORT} || exit 1
