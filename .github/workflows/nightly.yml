@@ -9,11 +9,15 @@ jobs:
       #
       # Checkout
       #
+      - name: checkout patch
+        with:
+          path: newfile
       - name: checkout code
         uses: actions/checkout@v2
         with:
           repository: hay-kot/mealie
-          ref: a2f8f271937780a198cf6340293ec7a49513e124
+          ref: f79420886270ac8b36ed14b36e78ee5d8f7ad779
+          path: main
       #
       # Setup QEMU
       #
