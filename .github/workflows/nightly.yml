@@ -10,14 +10,28 @@ jobs:
       # Checkout
       #
       - name: checkout patch
+        uses: actions/checkout@v2
         with:
-          path: newfile
+          path: combined_source
       - name: checkout code
         uses: actions/checkout@v2
         with:
           repository: hay-kot/mealie
           ref: f79420886270ac8b36ed14b36e78ee5d8f7ad779
-          path: main
+          path: mealie_source
+      #
+      # Copy files into mealie_source
+      #
+      - name: Copy Dockerfile
+        uses: canastro/copy-file-action@master
+        with:
+          source: "combined_source/Dockerfile"
+          target: "mealie_source/Dockerfile"
+      - name: Copy entrypoint
+        uses: canastro/copy-file-action@master
+        with:
+          source: "combined_source/run.sh"
+          target: "mealie_source/run.sh"
       #
       # Setup QEMU
       #
@@ -47,6 +61,7 @@ jobs:
       # Build
       #
       - name: build the image
+        working-directory: ./mealie_source
         run: |
           docker build --push --no-cache \
             --tag hendrix04/mealie-combined:nightly \
