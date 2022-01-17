@@ -127,6 +127,7 @@ COPY --from=builder-base /usr/bin/caddy /usr/bin/caddy
 COPY ./mealie $MEALIE_HOME/mealie
 COPY ./poetry.lock ./pyproject.toml $MEALIE_HOME/
 COPY ./gunicorn_conf.py $MEALIE_HOME
+COPY ./run.sh $MEALIE_HOME
 
 # copy frontend
 COPY --from=builder-frontend /app/frontend $MEALIE_HOME/frontend
