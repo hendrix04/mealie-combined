@@ -1,0 +1,48 @@
+version: "3.1"
+services:
+  mealie-combined:
+    container_name: mealie-combined
+    image: mealie-combined:dev
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 9090:3000
+    environment:
+      - ALLOW_SIGNUP=true
+      - API_URL=http://localhost:80
+
+      # =====================================
+      # Light Mode Config
+      - THEME_LIGHT_PRIMARY=#E58325
+      - THEME_LIGHT_ACCENT=#007A99
+      - THEME_LIGHT_SECONDARY=#973542
+      - THEME_LIGHT_SUCCESS=#43A047
+      - THEME_LIGHT_INFO=#1976D2
+      - THEME_LIGHT_WARNING=#FF6D00
+      - THEME_LIGHT_ERROR=#EF5350
+      # =====================================
+      # Light Mode Config
+      - THEME_DARK_PRIMARY=#E58325
+      - THEME_DARK_ACCENT=#007A99
+      - THEME_DARK_SECONDARY=#973542
+      - THEME_DARK_SUCCESS=#43A047
+      - THEME_DARK_INFO=#1976D2
+      - THEME_DARK_WARNING=#FF6D00
+      - THEME_DARK_ERROR=#EF5350
+      # ====================================
+      - DB_ENGINE=sqlite
+      # =====================================
+      # Postgres Config
+      - POSTGRES_USER=mealie
+      - POSTGRES_PASSWORD=mealie
+      - POSTGRES_SERVER=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=mealie
+
+      # =====================================
+      # Web Concurrency
+      - WORKERS_PER_CORE=0.5
+      - MAX_WORKERS=1
+      - WEB_CONCURRENCY=1
