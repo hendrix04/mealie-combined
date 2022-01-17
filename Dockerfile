@@ -87,6 +87,13 @@ COPY ./poetry.lock ./pyproject.toml ./
 RUN poetry install -E pgsql --no-dev
 
 ###############################################
+# CRFPP Image
+###############################################
+FROM hkotel/crfpp as crfpp
+
+RUN echo "crfpp-container" 
+
+###############################################
 # Production Image
 ###############################################
 FROM project-base as production
