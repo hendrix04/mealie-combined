@@ -52,8 +52,7 @@ ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 # create user account
 RUN useradd -u $PUID -U -d $MEALIE_HOME -s /bin/bash abc \
     && usermod -G users abc \
-    && mkdir $MEALIE_HOME \
-    && chown $PUID:$PGID -R $MEALIE_HOME
+    && mkdir $MEALIE_HOME
 
 ###############################################
 # Builder Image
@@ -160,5 +159,7 @@ EXPOSE ${FRONTEND_PORT}
 
 HEALTHCHECK CMD curl -f http://localhost:${BACKEND_PORT} || exit 1
 
-RUN chmod +x $MEALIE_HOME/run.sh
+RUN chown $PUID:$PGID -R $MEALIE_HOME \
+    &&chmod +x $MEALIE_HOME/run.sh
+
 ENTRYPOINT $MEALIE_HOME/run.sh
