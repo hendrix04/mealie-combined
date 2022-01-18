@@ -29,7 +29,7 @@ RUN rm -rf node_modules && \
 ###############################################
 # Base Image
 ###############################################
-FROM combos/python_node:3_16 as project-base
+FROM combos/python_node:3.10-slim-bullseye_16-bullseye-slim as project-base
 
 ENV MEALIE_HOME="/app"
 
