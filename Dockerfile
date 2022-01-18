@@ -42,15 +42,18 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1 \
     PYSETUP_PATH="/opt/pysetup" \
-    VENV_PATH="/opt/pysetup/.venv"
+    VENV_PATH="/opt/pysetup/.venv" \
+    PUID=99 \
+    PGID=100
 
 # prepend poetry and venv to path
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 # create user account
-RUN useradd -u 911 -U -d $MEALIE_HOME -s /bin/bash abc \
+RUN useradd -u $PUID -U -d $MEALIE_HOME -s /bin/bash abc \
     && usermod -G users abc \
-    && mkdir $MEALIE_HOME
+    && mkdir $MEALIE_HOME \
+    && chown $PUID:$PGID -R $MEALIE_HOME
 
 ###############################################
 # Builder Image
