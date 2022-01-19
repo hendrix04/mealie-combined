@@ -106,6 +106,7 @@ ENV PRODUCTION=true
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
     curl \
+    ca-certificates \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
 
