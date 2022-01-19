@@ -61,6 +61,7 @@ FROM project-base as builder-base
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
     curl \
+    ca-certificates \
     build-essential \
     libpq-dev \
     libwebp-dev \
