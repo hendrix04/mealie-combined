@@ -101,6 +101,9 @@ RUN echo "crfpp-container"
 ###############################################
 FROM project-base as production
 ENV PRODUCTION=true
+ENV TESTING=false
+ARG COMMIT
+ENV GIT_COMMIT_HASH=$COMMIT
 
 # curl for used by healthcheck
 RUN apt-get update \
@@ -138,6 +141,8 @@ COPY --from=builder-frontend /app/frontend $MEALIE_HOME/frontend
 
 #! Future
 # COPY ./alembic ./alembic.ini $MEALIE_HOME/
+COPY ./alembic $MEALIE_HOME/alembic
+COPY ./alembic.ini $MEALIE_HOME/
 
 # venv already has runtime deps installed we get a quicker install
 WORKDIR $MEALIE_HOME
@@ -159,7 +164,7 @@ ENV Host 0.0.0.0
 
 EXPOSE ${FRONTEND_PORT}
 
-HEALTHCHECK CMD curl -f http://localhost:${BACKEND_PORT} || exit 1
+HEALTHCHECK CMD curl -f http://localhost:${BACKEND_PORT}/docs || exit 1
 
 RUN chown $PUID:$PGID -R $MEALIE_HOME \
     &&chmod +x $MEALIE_HOME/run.sh
