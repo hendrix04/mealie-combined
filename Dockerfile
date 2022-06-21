@@ -73,7 +73,7 @@ RUN apt-get update \
     apt-transport-https \
     && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | apt-key add - \
     && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABA1F9B8875A6661
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABA1F9B8875A6661 \
     && apt-get update \
     && apt-get install --no-install-recommends -y \
     caddy \
