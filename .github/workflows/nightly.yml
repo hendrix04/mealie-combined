@@ -65,5 +65,5 @@ jobs:
         run: |
           docker build --push --no-cache \
             --tag hendrix04/mealie-combined:nightly \
-            --platform linux/amd64 .
             --build-arg COMMIT=$(git rev-parse HEAD) \
+            --platform linux/amd64 .
