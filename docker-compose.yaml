@@ -11,7 +11,7 @@ services:
       - 9090:3000
     environment:
       - ALLOW_SIGNUP=true
-      - API_URL=http://localhost:80
+      - API_URL=http://localhost:9000
 
       # =====================================
       # Light Mode Config
