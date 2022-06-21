@@ -157,7 +157,7 @@ WORKDIR /
 RUN curl -L0 $CRF_MODEL_URL --output $MEALIE_HOME/mealie/services/parser_services/crfpp/model.crfmodel
 
 VOLUME [ "$MEALIE_HOME/data/" ]
-ENV BACKEND_PORT=80
+ENV BACKEND_PORT=9000
 ENV FRONTEND_PORT=3000
 ENV API_URL="http://localhost:$BACKEND_PORT"
 ENV Host 0.0.0.0
