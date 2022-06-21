@@ -146,7 +146,7 @@ WORKDIR /
 
 # copy frontend
 # COPY --from=frontend-build /app/dist $MEALIE_HOME/dist
-COPY ./Caddyfile $MEALIE_HOME
+#COPY ./Caddyfile $MEALIE_HOME
 
 # Grab CRF++ Model Release
 RUN curl -L0 $CRF_MODEL_URL --output $MEALIE_HOME/mealie/services/parser_services/crfpp/model.crfmodel
