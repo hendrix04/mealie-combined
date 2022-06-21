@@ -8,5 +8,5 @@ sh ./mealie/run.sh
 # If the source would change the frontend
 # code to just use the standard shell script
 cd frontend
-caddy start --config ./Caddyfile
+caddy start --config /app/frontend/Caddyfile
 yarn start -p 3001
